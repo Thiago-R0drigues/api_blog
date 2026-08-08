@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 
 
-from database import get_db
-import schemas
-import models
-import routers
+from app.database import get_db
+import app.routers as routers
 
 VERSION = 'ALPHA'
 

@@ -1,9 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base
+from app.models import Base
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-DATABASE_URL = 'sqlite:///database.db'
+DATABASE_URL = os.getenv('DATABASE_KEY')
+
+if not DATABASE_URL:
+    raise ValueError('environment variable DATABASE_KEY not defined!')
+
 connect_args = {'check_same_thread': False}
 engine = create_engine(DATABASE_URL, connect_args=connect_args, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

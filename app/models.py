@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 
+
 class Base(DeclarativeBase):
     pass
 
@@ -9,4 +10,11 @@ class Post(Base):
     post_id: Mapped[int] = mapped_column(autoincrement=True, primary_key=True)
     post_title: Mapped[str]
     post_description: Mapped[str]
+
+class User(Base):
+    __tablename__ = 'users'
+
+    user_id: Mapped[int] = mapped_column(autoincrement=True, primary_key=True)
+    user_email: Mapped[str]
+    user_password: Mapped[str]
 

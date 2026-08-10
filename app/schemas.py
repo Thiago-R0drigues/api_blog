@@ -8,6 +8,6 @@ class Post(Base):
     post_description: str
 
 class User(Base):
-    name: str
-    email: EmailStr
-    password: str
+    user_name: str
+    user_email: EmailStr
+    user_password: str

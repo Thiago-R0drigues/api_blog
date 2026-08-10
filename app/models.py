@@ -15,6 +15,7 @@ class User(Base):
     __tablename__ = 'users'
 
     user_id: Mapped[int] = mapped_column(autoincrement=True, primary_key=True)
+    user_name: Mapped[str]
     user_email: Mapped[str]
     user_password: Mapped[str]
 

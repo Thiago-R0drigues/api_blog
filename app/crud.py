@@ -4,9 +4,45 @@ from sqlalchemy.orm import Session
 import app.schemas as schemas
 import app.models as models
 
+
+#CRUD USER
+def get_users(db:Session):
+    stmt = select(models.User)
+    users = db.execute(stmt).scalars().all()
+    return users
+
+
+def create_user(user: schemas.User, db:Session):
+    new_user = models.User(**user.model_dump())
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
+def update_user(user_id: int, user: schemas.User, db: Session):
+    stmt = select(models.User).where(models.User.user_id == user_id)
+    user_to_update = db.execute(stmt).scalar()
+
+    if user_to_update:
+        user_updated = user.model_dump(exclude_unset=True)
+
+        for key, value in user_updated.items():
+            setattr(user_to_update, key, value)
+
+        db.commit()
+        db.refresh(user_to_update)
+
+def delete_user(user_id: int, db: Session):
+    stmt = select(models.User).where(models.User.user_id == user_id)
+    post_to_delete = db.execute(stmt).scalar()
+    db.delete(post_to_delete)
+    db.commit()
+
+#CRUD POSTS
+
 def get_posts(db: Session):
-    statement = select(models.Post)
-    posts = db.execute(statement).scalars().all()
+    stmt = select(models.Post)
+    posts = db.execute(stmt).scalars().all()
     return posts
 
 def create_post(post: schemas.Post, db: Session):

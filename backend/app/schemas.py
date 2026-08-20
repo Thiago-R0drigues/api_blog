@@ -11,7 +11,7 @@ class Post(Base):
     post_description: str
 
 class PostOut(Post):
-    post_id: int
+    post_id: int | None = None
 
 
 #USERS SCHEMAS

@@ -45,7 +45,7 @@ def get_posts(db: Session):
     posts = db.execute(stmt).scalars().all()
     return posts
 
-def create_post(post: schemas.Post, db: Session):
+def create_post(post: schemas.PostOut, db: Session):
     new_post = models.Post(**post.model_dump())
     db.add(new_post)
     db.commit()

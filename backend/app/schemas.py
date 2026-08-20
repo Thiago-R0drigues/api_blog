@@ -4,9 +4,17 @@ from datetime import datetime
 class Base(BaseModel):
     pass
 
+#POSTS SCHEMAS
+
 class Post(Base):
     post_title: str
     post_description: str
+
+class PostOut(Post):
+    post_id: int
+
+
+#USERS SCHEMAS
 
 class UserBase(Base):
     user_name: str

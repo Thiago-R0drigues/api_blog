@@ -35,12 +35,12 @@ def route_delete_user(user_id: int, db: Session = Depends(get_db)):
 
 
 #POSTS
-@router.get('/posts/', tags=['POSTS'], status_code=status.HTTP_200_OK, response_model=list[schemas.Post])
+@router.get('/posts/', tags=['POSTS'], status_code=status.HTTP_200_OK, response_model=list[schemas.PostOut])
 def route_get_posts(db: Session = Depends(get_db)):
     return crud.get_posts(db=db)
     
 @router.post('/posts/', tags=['POSTS'], status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
-def route_create_post(post: schemas.Post, db: Session = Depends(get_db)):
+def route_create_post(post: schemas.PostOut, db: Session = Depends(get_db)):
     return crud.create_post(post=post, db=db)
     
 

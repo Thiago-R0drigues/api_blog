@@ -16,16 +16,16 @@ def route_get_root():
 
 
 #USERS
-@router.get('/users/', tags=['USERS'], status_code=status.HTTP_200_OK, response_model=list[schemas.User])
+@router.get('/users/', tags=['USERS'], status_code=status.HTTP_200_OK, response_model=list[schemas.UserOut])
 def route_get_users(db: Session = Depends(get_db)):
     return crud.get_users(db=db)
 
 @router.post('/users/', tags=['USERS'], status_code=status.HTTP_201_CREATED)
-def route_create_user(user:schemas.User, db: Session = Depends(get_db)):
+def route_create_user(user:schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(user=user, db=db)
 
 @router.put('/users/{user_id}', tags=['USERS'], status_code=status.HTTP_202_ACCEPTED)
-def route_update_user(user_id: int, user: schemas.User, db: Session = Depends(get_db)):
+def route_update_user(user_id: int, user: schemas.UserUpdate, db: Session = Depends(get_db)):
     return crud.update_user(user_id=user_id, user=user, db=db)
 
 @router.delete('/users/{user_id}', tags=['USERS'], status_code=status.HTTP_204_NO_CONTENT)

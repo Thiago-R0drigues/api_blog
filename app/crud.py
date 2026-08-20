@@ -12,14 +12,14 @@ def get_users(db:Session):
     return users
 
 
-def create_user(user: schemas.User, db:Session):
+def create_user(user: schemas.UserCreate, db:Session):
     new_user = models.User(**user.model_dump())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+    return f'User {user.user_name} has been created successfully'
 
-def update_user(user_id: int, user: schemas.User, db: Session):
+def update_user(user_id: int, user: schemas.UserUpdate, db: Session):
     stmt = select(models.User).where(models.User.user_id == user_id)
     user_to_update = db.execute(stmt).scalar()
 

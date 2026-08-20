@@ -9,7 +9,7 @@ load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_KEY')
 
 if not DATABASE_URL:
-    raise ValueError('environment variable DATABASE_KEY not defined!')
+    DATABASE_URL = 'sqlite:///database.db'
 
 connect_args = {'check_same_thread': False}
 engine = create_engine(DATABASE_URL, connect_args=connect_args, echo=True)
